@@ -409,12 +409,6 @@ main::after { opacity:.14; background:#2f5d8a }
 .m-row li:first-child { color:#fff }
 .m-row li:last-child:not(:first-child) { color:#4ade80 }
 @keyframes marquee { to { transform:translateX(-50%) } }
-@media (prefers-reduced-motion:reduce) {
-  .m-track { animation:none !important; width:100%; padding:0 16px }
-  .m-row[aria-hidden] { display:none } .m-row { flex:1 1 auto; min-width:0; flex-wrap:wrap; justify-content:center; gap:12px 0 }
-  .marquee { -webkit-mask-image:none; mask-image:none }
-  .m-row li:last-child b { display:none }
-}
 @media (max-width:520px) { .m-row li { font-size:9px } .m-row li b { margin:0 16px } }
 
 /* ───────── Next Quest banner (landscape, no flip) ───────── */
@@ -427,3 +421,8 @@ main::after { opacity:.14; background:#2f5d8a }
 .next-quest p { font-size:23px; line-height:1.15; opacity:.9; margin:0 }
 .next-quest .teaser { font:11px/1.6 var(--px); color:#facc15; text-shadow:2px 2px 0 #000 }
 @media (max-width:620px) { .next-quest { grid-template-columns:1fr; padding:14px } }
+
+/* The marquee always scrolls (slowly); it pauses on hover/focus. Slower still when the OS asks for reduced motion. */
+.marquee .m-track { animation:marquee 55s linear infinite !important }
+.marquee:hover .m-track, .marquee:focus-within .m-track { animation-play-state:paused !important }
+@media (prefers-reduced-motion:reduce) { .marquee .m-track { animation-duration:90s !important } }
