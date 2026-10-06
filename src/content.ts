@@ -2,7 +2,11 @@
 export const profile = {
   name: 'JAISHREE DAMODHARAN',
   tagline: 'Software engineering student building secure, intelligent systems.',
-  facts: ['MTech SE @ VIT', '2022–2027', 'CGPA 8.65', 'Open to opportunities'],
+  // Scrolling "who am I" ticker under the landing screen
+  ticker: [
+    'JAISHREE DAMODHARAN', 'MTech SE @ VIT', '2022–2027', 'CGPA 8.65', 'Deepfake detection · 93.85%',
+    'Patent co-inventor', 'Google Cybersecurity certified', '100+ LeetCode problems', 'Open to opportunities',
+  ],
   location: 'Currently at VIT Vellore, India.',
   email: 'jai.shree.dam@gmail.com',
   resume: '/resume.pdf',

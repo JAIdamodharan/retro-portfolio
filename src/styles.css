@@ -395,3 +395,24 @@ main::after { opacity:.14; background:#2f5d8a }
 .tiles small { opacity:.7; font-size:19px }
 .study .repo { display:inline-block; margin-top:18px; text-decoration:none }
 @media (max-width:520px) { .study { padding:20px 16px 24px; font-size:21px } .pipe li::after { display:none } }
+
+/* ───────── "who am I" marquee under the landing screen ───────── */
+.marquee { margin:28px 0 0; padding:14px 0; overflow:hidden; position:relative;
+  background:linear-gradient(180deg,#ffffff1a,#ffffff08); border-block:1px solid #ffffff2e;
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  -webkit-mask-image:linear-gradient(90deg,#0000,#000 7%,#000 93%,#0000); mask-image:linear-gradient(90deg,#0000,#000 7%,#000 93%,#0000) }
+.m-track { display:flex; width:max-content; animation:marquee 55s linear infinite }
+.marquee:hover .m-track, .marquee:focus-within .m-track { animation-play-state:paused }
+.m-row { display:flex; flex:none; list-style:none; margin:0; padding:0 }
+.m-row li { font:11px var(--px); color:#f1ecff; white-space:nowrap; display:flex; align-items:center; text-shadow:0 0 10px #a855f755 }
+.m-row li b { font-weight:400; color:#facc15; margin:0 26px; font-size:12px }
+.m-row li:first-child { color:#fff }
+.m-row li:last-child:not(:first-child) { color:#4ade80 }
+@keyframes marquee { to { transform:translateX(-50%) } }
+@media (prefers-reduced-motion:reduce) {
+  .m-track { animation:none !important; width:100%; padding:0 16px }
+  .m-row[aria-hidden] { display:none } .m-row { flex:1 1 auto; min-width:0; flex-wrap:wrap; justify-content:center; gap:12px 0 }
+  .marquee { -webkit-mask-image:none; mask-image:none }
+  .m-row li:last-child b { display:none }
+}
+@media (max-width:520px) { .m-row li { font-size:9px } .m-row li b { margin:0 16px } }
