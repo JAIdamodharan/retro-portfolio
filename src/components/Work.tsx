@@ -1,5 +1,5 @@
-import { ReactNode, useState } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { ReactNode, useEffect, useRef, useState } from 'react'
+import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { inventory, projects, soon } from '../content'
 import { useGame } from '../game'
 import { sfx } from '../sfx'
@@ -42,6 +42,46 @@ function FlipCard({ index, front, back, label, onFlip, wide = false }: {
 
 const FlipHint = ({ back = false }: { back?: boolean }) => <span className="flip-hint">{back ? '↻ FLIP BACK' : '↻ TAP TO FLIP'}</span>
 
+// Landscape banner (no flip): the title types out, then its letters bounce in a slow wave.
+function NextQuest() {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
+  const title = soon.title.toUpperCase()
+  const [n, setN] = useState(0)
+  const [hover, setHover] = useState(false)
+  const done = n >= title.length
+
+  useEffect(() => {
+    if (!inView || done) return
+    if (reduced) { setN(title.length); return }
+    const t = setTimeout(() => setN(n + 1), 120)
+    return () => clearTimeout(t)
+  }, [inView, n, done, reduced, title.length])
+
+  return (
+    <div className="next-quest" ref={ref} onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
+      <div className="art"><div className="art-screen"><NeuralArt play={hover} /><span className="no">?</span></div></div>
+      <div className="nq-body">
+        <div className="title-row">
+          <MiniMonitor kind="ai" />
+          <h3 aria-label={soon.title}>
+            {[...title].slice(0, n).map((c, i) => (
+              <motion.span key={i} aria-hidden className="ltr" initial={{ y: -16, opacity: 0 }}
+                animate={done && !reduced ? { y: [0, -9, 0], opacity: 1 } : { y: 0, opacity: 1 }}
+                transition={done && !reduced ? { repeat: Infinity, duration: 1.9, delay: i * 0.13, ease: 'easeInOut' } : { duration: 0.3, ease: 'easeOut' }}>{c}</motion.span>
+            ))}
+            {!done && <span className="caret sm" aria-hidden />}
+          </h3>
+        </div>
+        <motion.p initial={{ opacity: 0, y: 8 }} animate={done ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>{soon.line}</motion.p>
+        <div className="loadbar" aria-hidden><motion.i initial={{ width: '6%' }} animate={done ? { width: '62%' } : {}} transition={{ duration: 3, ease: 'easeOut' }} /></div>
+        <motion.strong className="teaser" initial={{ opacity: 0 }} animate={done ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.6 }}>{soon.teaser}</motion.strong>
+      </div>
+    </div>
+  )
+}
+
 export default function Work() {
   const { addXp, say, unlock } = useGame()
   const [seen, setSeen] = useState<Set<number>>(new Set())
@@ -50,7 +90,7 @@ export default function Work() {
   const onFlip = (i: number, first: boolean) => {
     if (!first) return
     addXp(15); sfx.coin()
-    say(i < projects.length ? 'Quest card unlocked! +15' : 'Ooh, what comes next?')
+    say('Quest card unlocked! +15')
     setSeen(s => {
       const n = new Set(s).add(i)
       if (n.size >= projects.length) unlock('explorer')
@@ -81,20 +121,7 @@ export default function Work() {
               <FlipHint back />
             </>} />
         ))}
-        <FlipCard index={4} wide label={`${soon.title}: ${soon.line}`} onFlip={f => onFlip(4, f)}
-          front={hover => <>
-            <div className="art"><div className="art-screen"><NeuralArt play={hover} /><span className="no">?</span></div></div>
-            <div className="title-row"><MiniMonitor kind="ai" /><h3>{soon.title}</h3></div>
-            <p>{soon.line}</p>
-            <div className="loadbar" aria-hidden><motion.i initial={{ width: '6%' }} whileInView={{ width: '62%' }} viewport={{ once: true }} transition={{ duration: 3, ease: 'easeOut' }} /></div>
-            <div className="stat"><strong className="teaser">{soon.teaser}</strong></div>
-            <FlipHint />
-          </>}
-          back={n => <>
-            <div className="back-bar"><i /><i /><i /><span>NEXT_QUEST.EXE</span></div>
-            <Terminal key={n} lines={soon.log} />
-            <FlipHint back />
-          </>} />
+        <NextQuest />
       </div>
       <div className="inventory">
         <h4>INVENTORY</h4>

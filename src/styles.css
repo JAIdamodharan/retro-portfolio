@@ -416,3 +416,14 @@ main::after { opacity:.14; background:#2f5d8a }
   .m-row li:last-child b { display:none }
 }
 @media (max-width:520px) { .m-row li { font-size:9px } .m-row li b { margin:0 16px } }
+
+/* ───────── Next Quest banner (landscape, no flip) ───────── */
+.next-quest { grid-column:1 / -1; display:grid; grid-template-columns:minmax(220px,290px) 1fr; gap:26px; align-items:center; padding:14px 26px 14px 14px;
+  border-radius:24px; border:1px solid #ffffff47; background:linear-gradient(145deg,#ffffff2e,#ffffff10 50%,#ffffff1c);
+  -webkit-backdrop-filter:blur(20px) saturate(105%); backdrop-filter:blur(20px) saturate(105%); box-shadow:0 14px 34px #00000059, inset 0 1px 0 #ffffff73 }
+.nq-body { display:flex; flex-direction:column; gap:12px; min-width:0 }
+.next-quest h3 { font:clamp(14px,2.4vw,20px)/1.4 var(--px); color:#fff; margin:0; min-height:1.4em; letter-spacing:.04em }
+.next-quest .ltr { display:inline-block; white-space:pre; text-shadow:2px 2px 0 #00000066 }
+.next-quest p { font-size:23px; line-height:1.15; opacity:.9; margin:0 }
+.next-quest .teaser { font:11px/1.6 var(--px); color:#facc15; text-shadow:2px 2px 0 #000 }
+@media (max-width:620px) { .next-quest { grid-template-columns:1fr; padding:14px } }
