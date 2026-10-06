@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://retro-portfolio-ochre.vercel.app/sitemap.xml
