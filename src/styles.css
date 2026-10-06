@@ -345,3 +345,28 @@ html { scrollbar-color:#a855f7 #12061f }
 .front { background:linear-gradient(145deg,#ffffff38 0,#ffffff16 45%,#ffffff26 100%) }
 main::before { opacity:.16; background:#5b4b8a }
 main::after { opacity:.14; background:#2f5d8a }
+
+/* ───────── old-TV corner fog on the video (soft, cloud-like) ───────── */
+.fog { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden }
+.fog::before, .fog::after { content:''; position:absolute; inset:-6%; filter:blur(34px) }
+/* dark smoky clouds hugging each corner */
+.fog::before {
+  background:
+    radial-gradient(ellipse 30% 26% at 2% 3%,   #070410f5, #07041000 100%),
+    radial-gradient(ellipse 22% 20% at 14% 2%,  #070410cc, #07041000 100%),
+    radial-gradient(ellipse 18% 24% at 2% 18%,  #070410cc, #07041000 100%),
+    radial-gradient(ellipse 28% 26% at 99% 2%,  #070410f2, #07041000 100%),
+    radial-gradient(ellipse 20% 22% at 98% 20%, #070410c4, #07041000 100%),
+    radial-gradient(ellipse 32% 26% at 1% 99%,  #070410f5, #07041000 100%),
+    radial-gradient(ellipse 22% 22% at 16% 99%, #070410c8, #07041000 100%),
+    radial-gradient(ellipse 30% 28% at 99% 98%, #070410f2, #07041000 100%),
+    radial-gradient(ellipse 20% 22% at 84% 99%, #070410c8, #07041000 100%) }
+/* pale lavender haze floating just inside, like glow bleeding on glass */
+.fog::after {
+  filter:blur(46px);
+  background:
+    radial-gradient(ellipse 20% 14% at 20% 12%, #c4b5fd2e, #0000 100%),
+    radial-gradient(ellipse 18% 14% at 80% 10%, #c4b5fd26, #0000 100%),
+    radial-gradient(ellipse 18% 14% at 82% 90%, #c4b5fd26, #0000 100%),
+    radial-gradient(ellipse 20% 14% at 18% 88%, #c4b5fd22, #0000 100%) }
+.hero-copy { z-index:2 }

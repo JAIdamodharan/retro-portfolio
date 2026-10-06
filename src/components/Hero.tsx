@@ -47,7 +47,7 @@ export default function Hero() {
       <motion.video className="hero-video" src="/hero.mp4" poster="/hero-poster.jpg" autoPlay muted loop playsInline preload="auto"
         onCanPlay={() => setReady(true)} onError={() => setReady(true)}
         style={{ x: tx, y: ty, scale: 1.08 }} aria-hidden />
-      <div className="tint" /><div className="scan" />
+      <div className="tint" /><div className="fog" aria-hidden /><div className="scan" />
       <Coin style={{ right: '14%', top: '28%' }} /><Coin style={{ right: '30%', top: '58%' }} />
 
       <AnimatePresence>
