@@ -325,3 +325,23 @@ html { scrollbar-color:#a855f7 #12061f }
   .hud .pbtn.tiny { padding:6px 8px; font-size:8px }
   .hud-trophy { margin-left:0 }
 }
+
+/* ───────── flashcards: neutral frosted glass (no purple fill) ───────── */
+.face { -webkit-backdrop-filter:blur(20px) saturate(170%); backdrop-filter:blur(20px) saturate(170%);
+  border:1px solid #ffffff47; box-shadow:0 14px 34px #00000059, inset 0 1px 0 #ffffff73, inset 0 -1px 0 #ffffff14 }
+.front { background:linear-gradient(145deg,#ffffff2e 0,#ffffff12 45%,#ffffff1f 100%) }
+.front::after { background:linear-gradient(120deg,#ffffff38 0,#0000 34%) }
+.back { background:linear-gradient(145deg,#0a0912b8,#0a091299) }
+.art-screen { background:linear-gradient(#0b0a12,#1e1a30) }
+.face h3, .face .stat strong { color:#fff; text-shadow:0 1px 3px #0006 }
+.face .stat strong { text-shadow:2px 2px 0 #00000066 }
+.face p { opacity:.9 }
+.face .stat small { color:#d4d4dc }
+.flip-hint { color:#d4d4dc; opacity:.65 }
+.back-bar { color:#d4d4dc; border-bottom-color:#ffffff2e }
+.back .term { color:#f1f1f6; text-shadow:0 0 6px #ffffff40 }
+.loadbar { border-color:#ffffff66 } .loadbar i { background:repeating-linear-gradient(90deg,#ffffffd9 0 6px,#ffffff80 6px 8px) }
+.face { -webkit-backdrop-filter:blur(22px) saturate(105%) brightness(1.05); backdrop-filter:blur(22px) saturate(105%) brightness(1.05) }
+.front { background:linear-gradient(145deg,#ffffff38 0,#ffffff16 45%,#ffffff26 100%) }
+main::before { opacity:.16; background:#5b4b8a }
+main::after { opacity:.14; background:#2f5d8a }
