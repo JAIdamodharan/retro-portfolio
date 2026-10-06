@@ -370,3 +370,28 @@ main::after { opacity:.14; background:#2f5d8a }
     radial-gradient(ellipse 18% 14% at 82% 90%, #c4b5fd26, #0000 100%),
     radial-gradient(ellipse 20% 14% at 18% 88%, #c4b5fd22, #0000 100%) }
 .hero-copy { z-index:2 }
+
+/* ───────── hero facts + case study ───────── */
+.facts { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:8px; margin:-8px 0 22px }
+.facts li { font:8px var(--px); padding:8px 11px; border-radius:999px; background:#ffffff1f; border:1px solid #ffffff40; color:#f4f0ff; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px) }
+.facts li:last-child { color:#4ade80; border-color:#4ade8066 }
+.repo.study-btn { all:unset; cursor:pointer; align-self:flex-start; font:9px var(--px); color:#0b0a12; background:#facc15; padding:9px 12px; border-radius:999px }
+.repo.study-btn:hover { filter:brightness(1.1) }
+.study-box { width:min(760px,100%); max-height:92vh }
+.study { max-height:calc(92vh - 110px); overflow:auto; padding:26px 28px 30px; color:#ece8f6; font-size:23px; line-height:1.25 }
+.study h2 { font:clamp(15px,2.4vw,20px)/1.5 var(--px); margin:4px 0 8px }
+.study h4 { font:10px var(--px); color:#facc15; margin:24px 0 8px }
+.study .kicker { font:9px var(--px); color:#c4b5fd } .study .stack { color:#4ade80; opacity:.9 }
+.study .muted { opacity:.65; font-size:20px }
+.pipe { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:8px 6px; align-items:center }
+.pipe li { font:9px var(--px); padding:9px 10px; border:1px solid #ffffff44; border-radius:8px; background:#ffffff14 }
+.pipe li:not(:last-child)::after { content:'→'; margin-left:10px; color:#facc15 }
+.split { display:flex; gap:4px; margin:8px 0; height:34px }
+.split span { display:grid; place-items:center; font:8px var(--px); background:#ffffff1f; border:1px solid #ffffff44; border-radius:6px; min-width:0; white-space:nowrap; overflow:hidden }
+.split span:first-child { background:#4ade8033 }
+.tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:8px 0 14px }
+.tiles div { padding:12px; border-radius:12px; background:#ffffff12; border:1px solid #ffffff33 }
+.tiles strong { display:block; font:clamp(14px,2.2vw,19px) var(--px); color:#fff }
+.tiles small { opacity:.7; font-size:19px }
+.study .repo { display:inline-block; margin-top:18px; text-decoration:none }
+@media (max-width:520px) { .study { padding:20px 16px 24px; font-size:21px } .pipe li::after { display:none } }

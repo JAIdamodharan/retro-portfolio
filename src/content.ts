@@ -2,6 +2,7 @@
 export const profile = {
   name: 'JAISHREE DAMODHARAN',
   tagline: 'Software engineering student building secure, intelligent systems.',
+  facts: ['MTech SE @ VIT', '2022–2027', 'CGPA 8.65', 'Open to opportunities'],
   location: 'Currently at VIT Vellore, India.',
   email: 'jai.shree.dam@gmail.com',
   resume: '/resume.pdf',
@@ -9,13 +10,32 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/jaishree-damodharan',
 }
 
-export type Project = { title: string; line: string; stat: string; label: string; art: ArtKey; log: string[]; repo?: string }
+export type Study = {
+  kicker: string; problem: string; steps: string[]
+  data: { source: string; split: [string, number][]; note: string }
+  results: [string, string][]; checks: string; shipped: string; stack: string
+}
+export type Project = { title: string; line: string; stat: string; label: string; art: ArtKey; log: string[]; repo?: string; study?: Study }
 export type ArtKey = 'deepfake' | 'reviews' | 'finance' | 'pods'
 
 export const projects: Project[] = [
   {
     title: 'Deepfake Detection', line: 'Spots AI-generated fake images with a CNN.',
     stat: '93.85%', label: 'accuracy', art: 'deepfake', repo: 'https://github.com/JAIdamodharan/Deep_Fake_Detection',
+    study: {
+      kicker: 'CASE STUDY 01',
+      problem: 'AI-generated faces are getting hard to spot, which makes impersonation and fraud easier. The goal: flag fake images automatically and report how confident the model is.',
+      steps: ['Image 224×224', 'ResNeXt-50 (ImageNet)', 'Bi-LSTM × 2', 'Classifier', 'Real / Fake + confidence'],
+      data: {
+        source: '140K Real and Fake Faces (Kaggle) · 70K real, 70K fake',
+        split: [['Train', 70], ['Validation', 15], ['Test', 15]],
+        note: 'Resized to 224×224 · flips, ±10° rotation and colour jitter for augmentation',
+      },
+      results: [['93.85%', 'test accuracy'], ['0.9939', 'ROC-AUC'], ['0.9943', 'PR-AUC'], ['21,000', 'unseen test images']],
+      checks: 'Accuracy alone is not enough for a security tool, so I also measured precision, recall, F1, calibration and where the model is confidently wrong.',
+      shipped: 'Exported to PyTorch (.pth) and ONNX, ready for web deployment.',
+      stack: 'Python · PyTorch · CNNs · OpenCV · Scikit-learn',
+    },
     log: [
       '> WHAT  Telling real images from AI-made fakes',
       '> HOW   Python, PyTorch, CNNs, OpenCV · 140K images',

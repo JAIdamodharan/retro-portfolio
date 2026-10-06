@@ -74,6 +74,9 @@ export default function Hero() {
         <p className="tagline" aria-label={profile.tagline}>
           {step >= 2 && <Typewriter text={profile.tagline} start={0.2} speed={28} onDone={() => setStep(s => Math.max(s, 3))} />}
         </p>
+        <motion.ul className="facts" initial={{ opacity: 0 }} animate={step >= 3 ? { opacity: 1 } : {}} aria-label="About">
+          {profile.facts.map(f => <li key={f}>{f}</li>)}
+        </motion.ul>
         <motion.div className="btns" initial={{ opacity: 0, y: 12 }} animate={step >= 3 ? { opacity: 1, y: 0 } : {}}>
           <a className="pbtn" href="#work" onClick={() => { sfx.jump(); unlock('start') }}>SEE MY WORK</a>
           <a className="pbtn ghost" href={profile.resume} target="_blank" rel="noopener" onClick={() => { sfx.blip(); addXp(5) }}>RESUME</a>

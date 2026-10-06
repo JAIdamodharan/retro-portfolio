@@ -5,6 +5,7 @@ import { useGame } from '../game'
 import { sfx } from '../sfx'
 import Coin from './Coin'
 import Terminal from './Terminal'
+import CaseStudy from './CaseStudy'
 import { Art, MiniMonitor, NeuralArt } from './Art'
 
 // A flashcard: tilts toward the cursor, flips on click/Enter, front + back faces.
@@ -44,6 +45,7 @@ const FlipHint = ({ back = false }: { back?: boolean }) => <span className="flip
 export default function Work() {
   const { addXp, say, unlock } = useGame()
   const [seen, setSeen] = useState<Set<number>>(new Set())
+  const [study, setStudy] = useState<number | null>(null)
 
   const onFlip = (i: number, first: boolean) => {
     if (!first) return
@@ -74,6 +76,7 @@ export default function Work() {
             back={n => <>
               <div className="back-bar"><i /><i /><i /><span>QUEST_0{i + 1}.EXE</span></div>
               <Terminal key={n} lines={p.log} />
+              {p.study && <button className="repo study-btn" onClick={e => { e.stopPropagation(); sfx.jump(); setStudy(i) }}>READ CASE STUDY ▸</button>}
               {p.repo && <a className="repo" href={p.repo} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>VIEW CODE ↗</a>}
               <FlipHint back />
             </>} />
@@ -98,6 +101,7 @@ export default function Work() {
         <ul className="chips">{inventory.skills.map(s => <li key={s}>{s}</li>)}</ul>
         <ul className="badges">{inventory.badges.map(b => <li key={b}>★ {b}</li>)}</ul>
       </div>
+      <CaseStudy project={study === null ? null : projects[study]} onClose={() => setStudy(null)} />
       <Coin style={{ right: '6%', top: '12%' }} />
       <Coin style={{ left: '4%', bottom: '8%' }} />
       <Coin style={{ right: '40%', bottom: '3%' }} />
